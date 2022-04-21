@@ -8,7 +8,7 @@ public class ButtonHandler : MonoBehaviour{
 
     public void ChangeCamera(int button){
         for (int i = 0; i < cameras.Length; i++){
-            if (button != i)
+            if (button-1 != i)
                 cameras[i].enabled = false;
             else
                 cameras[i].enabled = true;
