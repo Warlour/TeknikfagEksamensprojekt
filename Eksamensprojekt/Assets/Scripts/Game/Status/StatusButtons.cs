@@ -11,11 +11,15 @@ public class StatusButtons : MonoBehaviour {
     public GameObject ecPanel;
     public TextMeshProUGUI[] statusvars;
     private bool expanded;
+
+    // 0 = Critical, 1 = Below optimal, 2 = Optimal, 3 = Above optimal
     public string[] statusnames;
     public Color32[] Colors;
+
     public GameObject indicator;
     public GameObject indicatordot;
     private int Matches;
+
     private void Start (){
         expanded = false;
         ecPanel.SetActive(false);
@@ -47,6 +51,7 @@ public class StatusButtons : MonoBehaviour {
 
     private IEnumerator indicatorflash() {
         for (; ; ) {
+            Matches = 0;
             for (int i = 0; i < statusnames.Length; i++) {
                 for (int j = 0; j < statusvars.Length; j++) {
                     if (statusnames[i] != "Optimal" && statusvars[j].text == statusnames[i])
@@ -65,13 +70,42 @@ public class StatusButtons : MonoBehaviour {
             yield return new WaitForSeconds(0.25f);
         }
     }
+
+    public GameObject gameUI;
+    public GameObject puzzleUI;
+
+    public void Puzzle() {
+        gameUI.SetActive(false);
+        puzzleUI.SetActive(true);
+    }
+
+    public GameObject pressureUI;
+
     public void PressureFix() {
-    
+        Puzzle();
+        pressureUI.SetActive(true);
+        // statusvars[0].SetText(statusnames[2]);
+        // statusvars[0].color = Colors[2];
+
     }
+
+    public GameObject o2UI;
+
     public void O2Fix() {
-    
+        Puzzle();
+        o2UI.SetActive(true);
+        // statusvars[1].SetText(statusnames[2]);
+        // statusvars[1].color = Colors[2];
+
     }
+
+    public GameObject waterUI;
+
     public void WaterFix() {
-    
+        Puzzle();
+        waterUI.SetActive(true);
+        // statusvars[2].SetText(statusnames[2]);
+        // statusvars[2].color = Colors[2];
+
     }
 }
