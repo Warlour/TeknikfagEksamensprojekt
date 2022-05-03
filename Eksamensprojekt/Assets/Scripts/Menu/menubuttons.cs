@@ -18,8 +18,12 @@ public class menubuttons : MonoBehaviour{
         Debug.Log("Quit");
     }
     private void Start() {
-        SceneManager.UnloadSceneAsync("Menu");
-        SceneManager.UnloadSceneAsync("Game");
-        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        if (/*SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Menu")*/ SceneManager.sceneCount > 1) {
+            for (int i = 0; i < SceneManager.sceneCount; i++) {
+                if (SceneManager.GetSceneAt(i) != SceneManager.GetSceneByName("Menu"))
+                    SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i)); 
+            }
+            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        }
     }
 }
