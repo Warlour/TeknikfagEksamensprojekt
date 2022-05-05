@@ -10,12 +10,25 @@ public class UI : MonoBehaviour{
 
     private void Start() {
         StartCoroutine("UIchange");
+        StartCoroutine("holeflicker");
     }
 
     private IEnumerator UIchange() {
         for (; ; ) {
             flickersprite();
             yield return new WaitForSeconds(1f);
+        }
+    }
+
+    public GameObject holeobject;
+    public GameObject glowobject;
+
+    private IEnumerator holeflicker() {
+        for (; ; ) {
+            if (holeobject.activeSelf == true) {
+                glowobject.SetActive(!glowobject.activeSelf);
+            }
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

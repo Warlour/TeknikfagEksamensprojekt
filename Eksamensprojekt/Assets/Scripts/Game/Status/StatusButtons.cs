@@ -30,7 +30,7 @@ public class StatusButtons : MonoBehaviour {
         }
 
         Matches = 0;
-        StartCoroutine("indicatorflash");
+        StartCoroutine(indicatorflash());
     }
     
     public void Expandcontract() {
@@ -84,8 +84,7 @@ public class StatusButtons : MonoBehaviour {
     public void PressureFix() {
         Puzzle();
         pressureUI.SetActive(true);
-        // statusvars[0].SetText(statusnames[2]);
-        // statusvars[0].color = Colors[2];
+        
 
     }
 
