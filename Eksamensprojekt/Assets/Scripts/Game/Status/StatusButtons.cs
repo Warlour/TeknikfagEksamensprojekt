@@ -81,28 +81,29 @@ public class StatusButtons : MonoBehaviour {
 
     public GameObject pressureUI;
 
-    public void PressureFix() {
-        Puzzle();
-        pressureUI.SetActive(true);
-        
-
+    public void PressureFix(TextMeshProUGUI var) {
+        if (var.text != "Optimal") {
+            Puzzle();
+            pressureUI.SetActive(true);
+        }
     }
 
     public GameObject o2UI;
 
-    public void O2Fix() {
-        Puzzle();
-        o2UI.SetActive(true);
-        // statusvars[1].SetText(statusnames[2]);
-        // statusvars[1].color = Colors[2];
-
+    public void O2Fix(TextMeshProUGUI var) {
+        if (var.text != "Optimal") {
+            Puzzle();
+            o2UI.SetActive(true);
+        }
     }
 
     public GameObject waterUI;
 
-    public void WaterFix() {
-        Puzzle();
-        waterUI.SetActive(true);
+    public void WaterFix(TextMeshProUGUI var) {
+        if (var.text != "Optimal") {
+            Puzzle();
+            waterUI.SetActive(true);
+        }
         // statusvars[2].SetText(statusnames[2]);
         // statusvars[2].color = Colors[2];
 
