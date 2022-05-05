@@ -30,7 +30,8 @@ public class StatusButtons : MonoBehaviour {
         }
 
         Matches = 0;
-        StartCoroutine(indicatorflash());
+        StartCoroutine(IndicatorFlash());
+        StartCoroutine(HoleChecker());
     }
     
     public void Expandcontract() {
@@ -49,7 +50,13 @@ public class StatusButtons : MonoBehaviour {
         
     }
 
-    private IEnumerator indicatorflash() {
+    private IEnumerator HoleChecker() {
+        for (; ; ) {
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
+
+    private IEnumerator IndicatorFlash() {
         for (; ; ) {
             Matches = 0;
             for (int i = 0; i < statusnames.Length; i++) {
