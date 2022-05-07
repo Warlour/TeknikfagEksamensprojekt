@@ -13,6 +13,23 @@ namespace Warlour.MouseInteraction {
         public GameObject holeobject;
         public GameObject glowobject;
 
+        int o2fixes;
+        bool activated;
+        public RectTransform wheel;
+
+        public GameObject[] plants;
+        public GameObject completepanel;
+
+        public RectTransform hoseRT;
+        private bool startDrag;
+
+        public GameObject puzzleUI;
+        public GameObject gameUI;
+        public GameObject[] puzzleUIs;
+
+        public GameObject o2cpanel;
+        public GameObject watercpanel;
+
         private void Start() {
             activated = false;
             o2fixes = 0;
@@ -26,10 +43,6 @@ namespace Warlour.MouseInteraction {
             statusscript.statusvars[0].color = statusscript.Colors[2];
             StartCoroutine(FixDone());
         }
-
-        int o2fixes;
-        bool activated;
-        public RectTransform wheel;
 
         public void O2Fix() {
             if (activated == false) {
@@ -46,16 +59,10 @@ namespace Warlour.MouseInteraction {
             }
         }
 
-        public GameObject[] plants;
-        public GameObject completepanel;
-
         public void PlantFix(GameObject salad) {
             salad.SetActive(false);
             o2fixes += 1;
         }
-
-        public RectTransform hoseRT;
-        private bool startDrag;
 
         public void StartDragUI() {
             startDrag = true;
@@ -63,10 +70,6 @@ namespace Warlour.MouseInteraction {
         public void StopDragUI() {
             startDrag = false;
         }
-
-        public GameObject puzzleUI;
-        public GameObject gameUI;
-        public GameObject[] puzzleUIs;
 
         private IEnumerator FixDone() {
             yield return new WaitForSeconds(3f);
@@ -76,10 +79,6 @@ namespace Warlour.MouseInteraction {
             puzzleUI.SetActive(false);
             gameUI.SetActive(true);
         }
-
-        public GameObject o2cpanel;
-        public GameObject watercpanel;
-
 
         private void Update() {
             if (o2fixes >= 4) {
