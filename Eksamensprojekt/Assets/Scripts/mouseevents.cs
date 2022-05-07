@@ -13,7 +13,10 @@ namespace Warlour.MouseInteraction {
         public GameObject holeobject;
         public GameObject glowobject;
 
-        // pressurevar = 0, o2var = 1, watervar = 2
+        private void Start() {
+            activated = false;
+            o2fixes = 0;
+        }
 
         public void HoleFix() {
             holetext.SetActive(true);
@@ -24,8 +27,8 @@ namespace Warlour.MouseInteraction {
             StartCoroutine(FixDone());
         }
 
-        int o2fixes = 0;
-        bool activated = false;
+        int o2fixes;
+        bool activated;
         public RectTransform wheel;
 
         public void O2Fix() {
@@ -39,7 +42,6 @@ namespace Warlour.MouseInteraction {
         private IEnumerator RotateWheel() {
             while (wheel.localRotation.z < 1) {
                 wheel.Rotate(new Vector3(0,0,1), -10);
-                Debug.Log(wheel.localRotation.z);
                 yield return new WaitForSeconds(0.01f);
             }
         }
@@ -50,6 +52,16 @@ namespace Warlour.MouseInteraction {
         public void PlantFix(GameObject salad) {
             salad.SetActive(false);
             o2fixes += 1;
+        }
+
+        public RectTransform hoseRT;
+        private bool startDrag;
+
+        public void StartDragUI() {
+            startDrag = true;
+        }
+        public void StopDragUI() {
+            startDrag = false;
         }
 
         public GameObject puzzleUI;
@@ -63,17 +75,32 @@ namespace Warlour.MouseInteraction {
             }
             puzzleUI.SetActive(false);
             gameUI.SetActive(true);
-
         }
 
-        public GameObject cpanel;
+        public GameObject o2cpanel;
+        public GameObject watercpanel;
+
 
         private void Update() {
             if (o2fixes >= 4) {
-                cpanel.SetActive(true);
+                o2cpanel.SetActive(true);
                 statusscript.statusvars[1].SetText(statusscript.statusnames[2]);
                 statusscript.statusvars[1].color = statusscript.Colors[2];
+                o2fixes = 0;
                 StartCoroutine(FixDone());
+            }
+            if (statusscript.inWater == true) {
+                if (startDrag) {
+                    if (hoseRT.sizeDelta.x < 900)
+                        hoseRT.sizeDelta = new Vector3(-Input.mousePosition.x + 1425, 45);
+                }
+                if (hoseRT.sizeDelta.x >= 900) {
+                    watercpanel.SetActive(true);
+                    statusscript.statusvars[2].SetText(statusscript.statusnames[2]);
+                    statusscript.statusvars[2].color = statusscript.Colors[2];
+                    statusscript.inWater = false;
+                    StartCoroutine(FixDone());
+                }
             }
         }
     }

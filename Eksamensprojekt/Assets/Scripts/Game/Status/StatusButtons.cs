@@ -31,7 +31,6 @@ public class StatusButtons : MonoBehaviour {
 
         Matches = 0;
         StartCoroutine(IndicatorFlash());
-        StartCoroutine(HoleChecker());
     }
     
     public void Expandcontract() {
@@ -48,12 +47,6 @@ public class StatusButtons : MonoBehaviour {
     }
     public void NextDay() {
         
-    }
-
-    private IEnumerator HoleChecker() {
-        for (; ; ) {
-            yield return new WaitForSeconds(0.25f);
-        }
     }
 
     private IEnumerator IndicatorFlash() {
@@ -105,14 +98,13 @@ public class StatusButtons : MonoBehaviour {
     }
 
     public GameObject waterUI;
+    public bool inWater;
 
     public void WaterFix(TextMeshProUGUI var) {
         if (var.text != "Optimal") {
             Puzzle();
             waterUI.SetActive(true);
+            inWater = true;
         }
-        // statusvars[2].SetText(statusnames[2]);
-        // statusvars[2].color = Colors[2];
-
     }
 }
