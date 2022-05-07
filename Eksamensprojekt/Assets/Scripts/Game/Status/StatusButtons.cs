@@ -19,7 +19,11 @@ public class StatusButtons : MonoBehaviour {
 
     public GameObject indicator;
     public GameObject indicatordot;
+    public TextMeshProUGUI indicatorText;
+    private Color32 warningColor = new Color32(255, 147, 0, 255);
+    private Color32 criticalColor = new Color32(255, 30, 30, 255);
     private int Matches;
+    private int MatchesCrit;
     private int Matches2;
     private int rRange;
 
@@ -145,13 +149,30 @@ public class StatusButtons : MonoBehaviour {
     private IEnumerator IndicatorFlash() {
         for (; ; ) {
             Matches = 0;
-            for (int i = 0; i < statusnames.Length; i++) {
-                for (int j = 0; j < statusvars.Length; j++) {
-                    if (statusnames[i] != "Optimal" && statusvars[j].text == statusnames[i])
-                        Matches += 1;
-                }
+            for (int i = 0; i < statusvars.Length; i++) {
+                if (statusvars[i].text != "Optimal" && statusvars[i].text != "Critical")
+                    Matches += 1;
             }
-            if (Matches > 0) {
+            MatchesCrit = 0;
+            for (int i = 0; i < statusvars.Length; i++) {
+                if (statusvars[i].text == "Critical")
+                    MatchesCrit += 1;
+            }
+            if (MatchesCrit > 0) {
+                indicatorText.text = "CRITICAL!";
+                indicator.GetComponent<Image>().color = criticalColor;
+                indicatordot.GetComponent<Image>().color = criticalColor;
+                if (expanded) {
+                    indicatordot.SetActive(false);
+                    indicator.SetActive(!indicator.activeSelf);
+                } else {
+                    indicator.SetActive(false);
+                    indicatordot.SetActive(!indicatordot.activeSelf);
+                }
+            } else if (Matches > 0) {
+                indicatorText.text = "WARNING";
+                indicator.GetComponent<Image>().color = warningColor;
+                indicatordot.GetComponent<Image>().color = warningColor;
                 if (expanded) {
                     indicatordot.SetActive(false);
                     indicator.SetActive(!indicator.activeSelf);

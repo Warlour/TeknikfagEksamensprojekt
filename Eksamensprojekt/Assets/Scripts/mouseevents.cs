@@ -75,7 +75,7 @@ namespace Warlour.MouseInteraction {
         }
 
         private IEnumerator FixDone() {
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(1.5f);
             for (int i = 0; i < puzzleUIs.Length; i++) {
                 puzzleUIs[i].SetActive(false);
             }
@@ -102,10 +102,9 @@ namespace Warlour.MouseInteraction {
             }
             int addTime = Random.Range(1, 5);
             uiscript.timer += addTime;
-            uiscript.exTimertext.color = new Color(uiscript.exTimertext.color.r, uiscript.exTimertext.color.g, uiscript.exTimertext.color.b, 1.0f);
-            uiscript.exTimertext.text = "+ " + addTime + " seconds";
+            uiscript.exTimertext.color = new Color32(76, 204, 102, 255);
+            uiscript.exTimertext.text = "+ " + addTime + " seconds (Completed task)";
             StartCoroutine(uiscript.FadeExText());
-
         }
 
         private void Update() {

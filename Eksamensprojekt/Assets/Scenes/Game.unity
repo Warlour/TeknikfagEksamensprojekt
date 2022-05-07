@@ -1431,7 +1431,7 @@ GameObject:
   - component: {fileID: 217785656}
   - component: {fileID: 217785655}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: indicatorText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2928,14 +2928,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 58
+  m_fontSizeBase: 58
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 58
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -10785,8 +10785,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 187.63904, y: 0}
-  m_SizeDelta: {x: 375.2781, y: 65}
+  m_AnchoredPosition: {x: 645.6, y: 0}
+  m_SizeDelta: {x: 1218.8864, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &969723288
 MonoBehaviour:
@@ -10817,8 +10817,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284927052
-  m_fontColor: {r: 0.3, g: 0.8, b: 0.4, a: 1}
+    rgba: 4282072276
+  m_fontColor: {r: 0.8301887, g: 0.2369098, b: 0.23104309, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10835,14 +10835,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -12309,8 +12309,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 513142655}
   m_HandleRect: {fileID: 513142654}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.9997993
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12615,6 +12615,7 @@ MonoBehaviour:
     rgba: 4293241173
   indicator: {fileID: 1861132019}
   indicatordot: {fileID: 835955654}
+  indicatorText: {fileID: 217785655}
   domehole: {fileID: 888434581}
   dayText: {fileID: 1311867621}
   fadeObject: {fileID: 1657481142}
@@ -19052,7 +19053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0002444565}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 500}
   m_Pivot: {x: 0, y: 1}
 --- !u!4 &2071047098 stripped

@@ -19,12 +19,33 @@ public class UI : MonoBehaviour{
 
     public StatusButtons statusscript;
 
+    private int Matches;
+
     private void Start() {
+        timertext.text = timer + " seconds";
         exTimertext.color = new Color(exTimertext.color.r, exTimertext.color.g, exTimertext.color.b, 0.0f);
 
         StartCoroutine(UIchange());
         StartCoroutine(holeflicker());
         StartCoroutine(Countdown());
+        StartCoroutine(CritCountdown());
+    }
+
+    private IEnumerator CritCountdown() {
+        for (; ; ) {
+            Matches = 0;
+            for (int i = 0; i < statusscript.statusvars.Length; i++) {
+                if (statusscript.statusvars[i].text == "Critical")
+                    Matches += 1;
+            }
+            if (Matches > 0) {
+                timer--;
+                exTimertext.color = new Color32(212, 61, 59, 255);
+                exTimertext.text = "- 2 seconds (Critical status)";
+                StartCoroutine(FadeExText());
+            }
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 
     private IEnumerator Countdown() {
@@ -34,7 +55,7 @@ public class UI : MonoBehaviour{
                 timer--;
                 timertext.text = timer + " seconds";
             } else {
-                StartCoroutine(lose());
+                StartCoroutine(Lose());
                 break;
             }
         }
@@ -42,7 +63,7 @@ public class UI : MonoBehaviour{
 
     public GameObject loseText;
 
-    private IEnumerator lose() {
+    private IEnumerator Lose() {
         StartCoroutine(statusscript.FadeOff(null));
         yield return new WaitForSeconds(1.0f);
         loseText.SetActive(true);
