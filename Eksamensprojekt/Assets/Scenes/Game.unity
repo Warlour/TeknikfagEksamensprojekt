@@ -12033,7 +12033,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 513142654}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999973
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12356,11 +12356,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusscript: {fileID: 1232919544}
-  holetext: {fileID: 1965350733}
+  holecomplete: {fileID: 1965350733}
   holeobject: {fileID: 1450159421}
   glowobject: {fileID: 956234485}
   wheel: {fileID: 1540665851}
-  plants: []
+  plants:
+  - {fileID: 2969341131021771893}
+  - {fileID: 1160254960}
+  - {fileID: 1340276615}
   completepanel: {fileID: 48000957}
   hoseRT: {fileID: 1000320269}
   puzzleUI: {fileID: 447956466}
@@ -15941,7 +15944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1657481143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18689,7 +18692,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00023142755}
+  m_AnchoredPosition: {x: 0, y: 0.0000032826576}
   m_SizeDelta: {x: 0, y: 500}
   m_Pivot: {x: 0, y: 1}
 --- !u!4 &2071047098 stripped
