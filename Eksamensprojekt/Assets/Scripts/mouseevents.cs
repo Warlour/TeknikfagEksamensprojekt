@@ -30,6 +30,8 @@ namespace Warlour.MouseInteraction {
         public GameObject o2cpanel;
         public GameObject watercpanel;
 
+        public UI uiscript;
+
         private void Start() {
             activated = false;
             o2fixes = 0;
@@ -92,11 +94,18 @@ namespace Warlour.MouseInteraction {
                 o2cpanel.SetActive(false);
                 for (int i = 0; i < plants.Length; i++) {
                     plants[i].SetActive(true);
+                    activated = false;
                 }
             } else if (game == "water") {
                 hoseRT.sizeDelta = new Vector3(130.0f, 45.0f);
                 watercpanel.SetActive(false);
             }
+            int addTime = Random.Range(1, 5);
+            uiscript.timer += addTime;
+            uiscript.exTimertext.color = new Color(uiscript.exTimertext.color.r, uiscript.exTimertext.color.g, uiscript.exTimertext.color.b, 1.0f);
+            uiscript.exTimertext.text = "+ " + addTime + " seconds";
+            StartCoroutine(uiscript.FadeExText());
+
         }
 
         private void Update() {

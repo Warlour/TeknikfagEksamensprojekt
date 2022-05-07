@@ -23,10 +23,25 @@ public class StatusButtons : MonoBehaviour {
     private int Matches2;
     private int rRange;
 
+    public GameObject domehole;
+
+    public TextMeshProUGUI dayText;
+    private int day;
+    public GameObject fadeObject;
+
+    public GameObject gameUI;
+    public GameObject puzzleUI;
+
+    public GameObject pressureUI;
+
+    public GameObject o2UI;
+
+    public GameObject waterUI;
+    public bool inWater;
+
     private void Start() {
-        fadeRI = fade.GetComponent<RawImage>();
-        fadeRI.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-        StartCoroutine(FadeOn());
+        fadeObject.GetComponent<RawImage>().color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        StartCoroutine(FadeOn(fadeObject));
 
         expanded = false;
         ecPanel.SetActive(false);
@@ -43,6 +58,15 @@ public class StatusButtons : MonoBehaviour {
         dayText.text = "Day " + day;
     }
 
+    private void Update() {
+        // if Pressure not optimal
+        if (statusvars[0].text != "Optimal") {
+            domehole.SetActive(true);
+        } else {
+            domehole.SetActive(false);
+        }
+    }
+
     public void Expandcontract() {
         if (expanded == false) {
             hsText.text = "‹";
@@ -56,14 +80,6 @@ public class StatusButtons : MonoBehaviour {
         expanded = !expanded;
     }
 
-    public TextMeshProUGUI dayText;
-    private int day;
-    public GameObject fade;
-    private RawImage fadeRI;
-
-    public GameObject[] mgPrefabs;
-    public GameObject[] mgObjects;
-
     public void NextDay() {
         Matches2 = 0;
         for (int i = 0; i < statusnames.Length; i++) {
@@ -73,8 +89,8 @@ public class StatusButtons : MonoBehaviour {
             }
         }
         if (Matches2 == 0) {
-            fadeRI.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-            StartCoroutine(FadeOn());
+            fadeObject.GetComponent<RawImage>().color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+            StartCoroutine(FadeOn(fadeObject));
 
             day++;
             dayText.text = "Day " + day;
@@ -85,14 +101,11 @@ public class StatusButtons : MonoBehaviour {
                 statusvars[i].color = Colors[rRange];
             }
 
-            for (int i = 0; i < mgObjects.Length; i++) {
-                Instantiate(mgPrefabs[i]);
-                Destroy(mgObjects[i]);
-            }
         }
     }
 
-    private IEnumerator FadeOn() {
+    public IEnumerator FadeOn(GameObject fade) {
+        RawImage fadeRI = fade.GetComponent<RawImage>();
         while (fadeRI.color.a > 0.0f) {
             fade.SetActive(true);
             fadeRI.color = new Color(
@@ -104,6 +117,29 @@ public class StatusButtons : MonoBehaviour {
             yield return new WaitForSeconds(0.01f);
         }
         fade.SetActive(false);
+    }
+
+    public IEnumerator FadeOff(GameObject fade) {
+        if (fade == null) {
+            fade = fadeObject;
+        }
+        RawImage fadeRI = fade.GetComponent<RawImage>();
+        fadeRI.color = new Color(
+            fadeRI.color.r,
+            fadeRI.color.g,
+            fadeRI.color.b,
+            0.0f
+        );
+        while (fadeRI.color.a < 1.0f) {
+            fade.SetActive(true);
+            fadeRI.color = new Color(
+                fadeRI.color.r,
+                fadeRI.color.g,
+                fadeRI.color.b,
+                fadeRI.color.a + 0.01f
+            );
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 
     private IEnumerator IndicatorFlash() {
@@ -128,14 +164,11 @@ public class StatusButtons : MonoBehaviour {
         }
     }
 
-    public GameObject gameUI;
-    public GameObject puzzleUI;
     public void Puzzle() {
         gameUI.SetActive(false);
         puzzleUI.SetActive(true);
     }
 
-    public GameObject pressureUI;
     public void PressureFix(TextMeshProUGUI var) {
         if (var.text != "Optimal") {
             Puzzle();
@@ -143,7 +176,6 @@ public class StatusButtons : MonoBehaviour {
         }
     }
 
-    public GameObject o2UI;
     public void O2Fix(TextMeshProUGUI var) {
         if (var.text != "Optimal") {
             Puzzle();
@@ -151,8 +183,6 @@ public class StatusButtons : MonoBehaviour {
         }
     }
 
-    public GameObject waterUI;
-    public bool inWater;
     public void WaterFix(TextMeshProUGUI var) {
         if (var.text != "Optimal") {
             Puzzle();
